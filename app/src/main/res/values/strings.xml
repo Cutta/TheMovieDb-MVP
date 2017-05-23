@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">TheMovieDb-MVP</string>
+    <string name="internet_connection_warning_text">İnternet bağlantınızı kontrol edin!</string>
 </resources>
