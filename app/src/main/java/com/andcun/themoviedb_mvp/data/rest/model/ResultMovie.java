@@ -23,7 +23,7 @@ public class ResultMovie {
     private Date releaseDate;
     @SerializedName("genre_ids")
     @Expose
-    private List<Long> genreIds = null;
+    private List<Integer> genreIds = null;
     @SerializedName("id")
     @Expose
     private Long id;
@@ -84,11 +84,11 @@ public class ResultMovie {
         this.releaseDate = releaseDate;
     }
 
-    public List<Long> getGenreIds() {
+    public List<Integer> getGenreIds() {
         return genreIds;
     }
 
-    public void setGenreIds(List<Long> genreIds) {
+    public void setGenreIds(List<Integer> genreIds) {
         this.genreIds = genreIds;
     }
 

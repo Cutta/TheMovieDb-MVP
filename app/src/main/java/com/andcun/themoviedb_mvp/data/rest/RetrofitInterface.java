@@ -68,5 +68,16 @@ interface RetrofitInterface {
                                                                    @Query("language") String language,
                                                                    @Query("page") int page);
 
+    //DISCOVER
+    @GET("discover/movie")
+    Observable<ResponseResultList<ResultMovie>> getDiscoverMovie(@Query("api_key") String apiKey,
+                                                                 @Query("language") String language,
+                                                                 @Query("page") int page);
+
+    @GET("discover/tv")
+    Observable<ResponseResultList<ResultTv>> getDiscoverTv(@Query("api_key") String apiKey,
+                                                                 @Query("language") String language,
+                                                                 @Query("page") int page);
+
 
 }

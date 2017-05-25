@@ -71,7 +71,17 @@ public class ApiSourceImpl implements ApiSource {
     }
 
     @Override
-    public Observable<ResponseResultList<ResultMovie>> getNowPlayingMovie( int page) {
+    public Observable<ResponseResultList<ResultMovie>> getNowPlayingMovie(int page) {
         return retrofitInterface.getNowPlayingMovie(BuildConfig.API_KEY, Locale.getDefault().getLanguage(), page);
+    }
+
+    @Override
+    public Observable<ResponseResultList<ResultMovie>> getDiscoverMovie(int page) {
+        return retrofitInterface.getDiscoverMovie(BuildConfig.API_KEY, Locale.getDefault().getLanguage(), page);
+    }
+
+    @Override
+    public Observable<ResponseResultList<ResultTv>> getDiscoverTv(int page) {
+        return retrofitInterface.getDiscoverTv(BuildConfig.API_KEY, Locale.getDefault().getLanguage(), page);
     }
 }

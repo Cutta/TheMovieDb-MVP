@@ -33,4 +33,8 @@ public interface ApiSource {
     Observable<ResponseResultList<ResultMovie>> getUpcomingMovie(int page);
 
     Observable<ResponseResultList<ResultMovie>> getNowPlayingMovie(int page);
+
+    Observable<ResponseResultList<ResultMovie>> getDiscoverMovie(int page);
+
+    Observable<ResponseResultList<ResultTv>> getDiscoverTv(int page);
 }

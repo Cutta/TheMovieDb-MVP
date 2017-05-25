@@ -30,7 +30,7 @@ public class MainMovieAdapter extends RecyclerView.Adapter<MainMovieAdapter.Main
         this.movieList = new ArrayList<>();
     }
 
-    public void setmovieList(List<ResultMovie> movieList) {
+    public void setMovieList(List<ResultMovie> movieList) {
         this.movieList = movieList;
         notifyDataSetChanged();
     }
@@ -49,7 +49,7 @@ public class MainMovieAdapter extends RecyclerView.Adapter<MainMovieAdapter.Main
         holder.tvTitle.setText(tempResultMovie.getTitle());
 
         Glide.with(holder.itemView.getContext())
-                .load(BuildConfig.IMAGE_PREFIX + tempResultMovie.getPosterPath())
+                .load(BuildConfig.IMAGE_PREFIX + tempResultMovie.getBackdropPath())
                 .into(holder.ivPoster);
 
     }

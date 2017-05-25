@@ -1,5 +1,6 @@
 package com.andcun.themoviedb_mvp.ui.main;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.StringRes;
 import android.support.design.widget.Snackbar;
@@ -13,6 +14,7 @@ import com.andcun.themoviedb_mvp.data.rest.model.ResultTv;
 import com.andcun.themoviedb_mvp.di.main.DaggerMainComponent;
 import com.andcun.themoviedb_mvp.di.main.MainModule;
 import com.andcun.themoviedb_mvp.ui.base.BaseActivity;
+import com.andcun.themoviedb_mvp.ui.discover.DiscoverActivity;
 import com.andcun.themoviedb_mvp.util.Utils;
 
 import java.util.List;
@@ -50,6 +52,8 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         super.onViewReady(savedInstanceState);
 
         mainPresenter.onViewReady();
+
+        startActivity(new Intent(MainActivity.this, DiscoverActivity.class));
     }
 
     @Override
@@ -109,11 +113,11 @@ public class MainActivity extends BaseActivity implements MainContract.View {
 
     @Override
     public void loadNowPlayingMovieList(List<ResultMovie> movieList) {
-        adapterMovieNowPlaying.setmovieList(movieList);
+        adapterMovieNowPlaying.setMovieList(movieList);
     }
 
     @Override
     public void loadUpcomingMovieList(List<ResultMovie> movieList) {
-        adapterMovieUpcoming.setmovieList(movieList);
+        adapterMovieUpcoming.setMovieList(movieList);
     }
 }
