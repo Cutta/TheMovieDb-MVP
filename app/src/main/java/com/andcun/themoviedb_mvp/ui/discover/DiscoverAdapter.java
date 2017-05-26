@@ -39,6 +39,13 @@ public class DiscoverAdapter<T> extends RecyclerView.Adapter<DiscoverAdapter.Dis
         notifyDataSetChanged();
     }
 
+    public void addDiscoverList(List<T> discoverList) {
+        List<T> sumList = this.discoverList;
+        sumList.addAll(discoverList);
+        notifyDataSetChanged();
+    }
+
+
     @Override
     public DiscoverViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_discover, parent, false);

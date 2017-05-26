@@ -16,13 +16,19 @@ public class DiscoverContract {
 
         void loadDiscoverMovie(List<ResultMovie> movieList);
 
+        void loadMoreDiscoverMovie(List<ResultMovie> movieList);
+
         void loadDiscoverTv(List<ResultTv> tvList);
 
+        void setLoadFlag(boolean isLoading);
     }
 
     interface Presenter {
 
         void onViewReady();
+
+
+        void decideLoadMore(int totalCount);//presenter karar vericek
 
     }
 }

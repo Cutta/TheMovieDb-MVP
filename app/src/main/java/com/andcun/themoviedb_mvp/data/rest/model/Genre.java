@@ -95,7 +95,8 @@ public enum Genre {
         for (Integer genreId : genreIds) {
             result += getGenreById(genreId).getName() + ", ";
         }
-        result = result.substring(0, result.length() - 2);
+        if (result.length() >= 2)//boş geldiği oldu o yüzden bu şartı arıyoruz
+            result = result.substring(0, result.length() - 2);
         return result;
     }
 }

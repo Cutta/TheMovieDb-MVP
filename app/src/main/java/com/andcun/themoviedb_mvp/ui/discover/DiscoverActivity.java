@@ -34,7 +34,9 @@ public class DiscoverActivity extends BaseActivity implements DiscoverContract.V
     DiscoverPresenter discoverPresenter;
 
     DiscoverAdapter<ResultMovie> discoverMovieAdapter;
+    LinearLayoutManager layoutManager;
 
+    private boolean isLoading = false;
 
     @Override
     protected void onViewReady(Bundle savedInstanceState) {
@@ -72,11 +74,14 @@ public class DiscoverActivity extends BaseActivity implements DiscoverContract.V
 
     private void setRecyclerView() {
         discoverMovieAdapter = new DiscoverAdapter<>();
-        rvDiscover.setLayoutManager(new LinearLayoutManager(this));
+        layoutManager = new LinearLayoutManager(this);
+        rvDiscover.setLayoutManager(layoutManager);
         rvDiscover.setMotionEventSplittingEnabled(false);
         rvDiscover.setHasFixedSize(true);
         rvDiscover.setNestedScrollingEnabled(false);
         rvDiscover.setAdapter(discoverMovieAdapter);
+
+        rvDiscover.addOnScrollListener(recyclerViewOnScrollListener);
     }
 
     @Override
@@ -85,7 +90,38 @@ public class DiscoverActivity extends BaseActivity implements DiscoverContract.V
     }
 
     @Override
+    public void loadMoreDiscoverMovie(List<ResultMovie> movieList) {
+        discoverMovieAdapter.addDiscoverList(movieList);
+    }
+
+    @Override
     public void loadDiscoverTv(List<ResultTv> tvList) {
         // discoverMovieAdapter.setDiscoverList(tvList);
     }
+
+    @Override
+    public void setLoadFlag(boolean isLoading) {
+        this.isLoading = isLoading;
+    }
+
+    private RecyclerView.OnScrollListener recyclerViewOnScrollListener = new RecyclerView.OnScrollListener() {
+        @Override
+        public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+            super.onScrollStateChanged(recyclerView, newState);
+        }
+
+        @Override
+        public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+            super.onScrolled(recyclerView, dx, dy);
+            int visibleItemCount = layoutManager.getChildCount();
+            int totalItemCount = layoutManager.getItemCount();
+            int firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition();
+            if (!isLoading) {
+                if ((visibleItemCount + firstVisibleItemPosition) >= (totalItemCount - 2)//sonuna kadar gelmemizi beklemeden istek yapsın
+                        && firstVisibleItemPosition >= 0) {
+                    discoverPresenter.decideLoadMore(totalItemCount);//karar presenter da
+                }
+            }
+        }
+    };
 }
