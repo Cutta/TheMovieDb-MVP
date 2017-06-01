@@ -26,9 +26,9 @@ public interface ApiSource {
 
     Observable<ResponseResultList<ResultTv>> getAiringToday(String apiKey, String language, int page);
 
-    Observable<ResponseResultList<ResultMovie>> getPopularMovie(String apiKey, String language, int page);
+    Observable<ResponseResultList<ResultMovie>> getPopularMovie(int page);
 
-    Observable<ResponseResultList<ResultMovie>> getTopRatedMovie(String apiKey, String language, int page);
+    Observable<ResponseResultList<ResultMovie>> getTopRatedMovie(int page);
 
     Observable<ResponseResultList<ResultMovie>> getUpcomingMovie(int page);
 
@@ -37,4 +37,6 @@ public interface ApiSource {
     Observable<ResponseResultList<ResultMovie>> getDiscoverMovie(int page);
 
     Observable<ResponseResultList<ResultTv>> getDiscoverTv(int page);
+
+
 }

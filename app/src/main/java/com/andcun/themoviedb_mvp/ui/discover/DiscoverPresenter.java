@@ -26,6 +26,7 @@ public class DiscoverPresenter extends BasePresenter<DiscoverContract.View> impl
     private int pageIndex = 1;
     private int FIRST_PAGE = 1;
     private int COUNT_PER_PAGE = 20;
+    private boolean isLoading;
 
     @Inject
     public DiscoverPresenter(DiscoverUseCase discoverUseCase) {
@@ -34,15 +35,16 @@ public class DiscoverPresenter extends BasePresenter<DiscoverContract.View> impl
 
     @Override
     public void onViewReady() {
+        //if (condition)
         getDiscoverMovie(pageIndex);
-        // getDiscoverTv(); // TODO: 25/05/2017 şimdilik sadece filmler gelsin diye
+        // getDiscoverTv(pageIndex); // TODO: 25/05/2017 şimdilik sadece filmler gelsin diye
     }
 
 
     @Override
     public void decideLoadMore(int totalItemCount) {
-        if (totalItemCount >= pageIndex * COUNT_PER_PAGE) {
-            getView().setLoadFlag(true);//artarda istek yapmasin diye
+        if (totalItemCount >= pageIndex * COUNT_PER_PAGE && !isLoading) {
+            isLoading = true;
             ++pageIndex;
             getDiscoverMovie(pageIndex);
         }
@@ -56,7 +58,7 @@ public class DiscoverPresenter extends BasePresenter<DiscoverContract.View> impl
                         if (page == FIRST_PAGE)
                             getView().loadDiscoverMovie(resultMovies);
                         else {
-                            getView().setLoadFlag(false);
+                            isLoading = false;
                             getView().loadMoreDiscoverMovie(resultMovies);
                         }
                     }
@@ -69,12 +71,17 @@ public class DiscoverPresenter extends BasePresenter<DiscoverContract.View> impl
 
     }
 
-    private void getDiscoverTv() {
+    private void getDiscoverTv(final int page) {
         discoverUseCase.getDiscoverTv(1).compose(RxTransformer.<List<ResultTv>>applyIOSchedulers())
                 .subscribe(new Consumer<List<ResultTv>>() {
                     @Override
                     public void accept(@NonNull List<ResultTv> tvList) throws Exception {
-                        getView().loadDiscoverTv(tvList);
+                        if (page == FIRST_PAGE)
+                            getView().loadDiscoverTv(tvList);
+                        else {
+                            isLoading = false;
+                            getView().loadMoreDiscoverTv(tvList);
+                        }
                     }
                 }, new Consumer<Throwable>() {
                     @Override

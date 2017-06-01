@@ -12,7 +12,7 @@
         android:title="@string/toolbar_title_discover" />
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_discover"
+        android:id="@+id/rv_movie"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

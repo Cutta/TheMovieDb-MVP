@@ -21,6 +21,7 @@ public class ApiSourceImpl implements ApiSource {
 
     private RetrofitInterface retrofitInterface;
 
+
     public ApiSourceImpl(Retrofit retrofit) {
         this.retrofitInterface = retrofit.create(RetrofitInterface.class);
     }
@@ -56,13 +57,13 @@ public class ApiSourceImpl implements ApiSource {
     }
 
     @Override
-    public Observable<ResponseResultList<ResultMovie>> getPopularMovie(String apiKey, String language, int page) {
-        return retrofitInterface.getPopularMovie(apiKey, language, page);
+    public Observable<ResponseResultList<ResultMovie>> getPopularMovie(int page) {
+        return retrofitInterface.getPopularMovie(BuildConfig.API_KEY, Locale.getDefault().getLanguage(), page);
     }
 
     @Override
-    public Observable<ResponseResultList<ResultMovie>> getTopRatedMovie(String apiKey, String language, int page) {
-        return retrofitInterface.getTopRatedMovie(apiKey, language, page);
+    public Observable<ResponseResultList<ResultMovie>> getTopRatedMovie(int page) {
+        return retrofitInterface.getTopRatedMovie(BuildConfig.API_KEY, Locale.getDefault().getLanguage(), page);
     }
 
     @Override

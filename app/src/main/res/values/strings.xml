@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">TheMovieDb-MVP</string>
     <string name="internet_connection_warning_text">İnternet bağlantınızı kontrol edin!</string>
-    <string name="activity_title_discover">Keşfet</string>
+
+    <string name="toolbar_title_discover">Keşfet</string>
+    <string name="toolbar_title_movies">Filmler</string>
 </resources>

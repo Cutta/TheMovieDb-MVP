@@ -36,8 +36,6 @@ public class DiscoverActivity extends BaseActivity implements DiscoverContract.V
     DiscoverAdapter<ResultMovie> discoverMovieAdapter;
     LinearLayoutManager layoutManager;
 
-    private boolean isLoading = false;
-
     @Override
     protected void onViewReady(Bundle savedInstanceState) {
         super.onViewReady(savedInstanceState);
@@ -69,7 +67,7 @@ public class DiscoverActivity extends BaseActivity implements DiscoverContract.V
     }
 
     private void setToolBar() {//// TODO: 26/05/2017 şimdilik böyle
-        toolbar.setTitle("Keşfet");
+        toolbar.setTitle(R.string.toolbar_title_discover);
     }
 
     private void setRecyclerView() {
@@ -78,7 +76,6 @@ public class DiscoverActivity extends BaseActivity implements DiscoverContract.V
         rvDiscover.setLayoutManager(layoutManager);
         rvDiscover.setMotionEventSplittingEnabled(false);
         rvDiscover.setHasFixedSize(true);
-        rvDiscover.setNestedScrollingEnabled(false);
         rvDiscover.setAdapter(discoverMovieAdapter);
 
         rvDiscover.addOnScrollListener(recyclerViewOnScrollListener);
@@ -100,9 +97,10 @@ public class DiscoverActivity extends BaseActivity implements DiscoverContract.V
     }
 
     @Override
-    public void setLoadFlag(boolean isLoading) {
-        this.isLoading = isLoading;
+    public void loadMoreDiscoverTv(List<ResultTv> movieList) {
+        //discoverMovieAdapter.addDiscoverList(movieList);
     }
+
 
     private RecyclerView.OnScrollListener recyclerViewOnScrollListener = new RecyclerView.OnScrollListener() {
         @Override
@@ -116,11 +114,11 @@ public class DiscoverActivity extends BaseActivity implements DiscoverContract.V
             int visibleItemCount = layoutManager.getChildCount();
             int totalItemCount = layoutManager.getItemCount();
             int firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition();
-            if (!isLoading) {
-                if ((visibleItemCount + firstVisibleItemPosition) >= (totalItemCount - 2)//sonuna kadar gelmemizi beklemeden istek yapsın
-                        && firstVisibleItemPosition >= 0) {
-                    discoverPresenter.decideLoadMore(totalItemCount);//karar presenter da
-                }
+
+            if ((visibleItemCount + firstVisibleItemPosition) >= (totalItemCount - REMAIN_ITEM_COUNT_TO_LOAD_MORE)//sonuna kadar gelmemizi beklemeden istek yapsın
+                    && firstVisibleItemPosition >= 0) {
+                discoverPresenter.decideLoadMore(totalItemCount);//karar presenter da
+
             }
         }
     };
