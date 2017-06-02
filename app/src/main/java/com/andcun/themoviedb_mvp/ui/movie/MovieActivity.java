@@ -1,5 +1,7 @@
 package com.andcun.themoviedb_mvp.ui.movie;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -10,12 +12,14 @@ import com.andcun.themoviedb_mvp.data.rest.model.ResultMovie;
 import com.andcun.themoviedb_mvp.di.movie.DaggerMovieComponent;
 import com.andcun.themoviedb_mvp.di.movie.MovieModule;
 import com.andcun.themoviedb_mvp.ui.base.BaseActivity;
+import com.andcun.themoviedb_mvp.util.Constant;
 
 import java.util.List;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
+
 
 /**
  * Created by cuneytcarikci on 01/06/2017.
@@ -35,6 +39,17 @@ public class MovieActivity extends BaseActivity implements MovieContract.View {
     MovieAdapter<ResultMovie> movieAdapter;
     LinearLayoutManager layoutManager;
 
+    MovieListType listType = MovieListType.Popular;
+
+    public static Intent newIntent(Context context, MovieListType listType) {
+        Bundle bundle = new Bundle();
+        bundle.putInt(Constant.EXTRA_LIST_TYPE, listType.ordinal());
+
+        Intent intent = new Intent(context, MovieActivity.class);
+        intent.putExtras(bundle);
+        return intent;
+    }
+
     @Override
     protected void onViewReady(Bundle savedInstanceState) {
         super.onViewReady(savedInstanceState);
@@ -44,11 +59,22 @@ public class MovieActivity extends BaseActivity implements MovieContract.View {
 
     @Override
     protected void resolveDaggerDependency() {
+        getExtras();
         DaggerMovieComponent.builder()
                 .appComponent(getApplicationComponent())
-                .movieModule(new MovieModule(this))
+                .movieModule(new MovieModule(this, listType))
                 .build()
                 .inject(this);
+    }
+
+    private void getExtras() {
+        Bundle extras = getIntent().getExtras();
+        if (extras != null && extras.containsKey(Constant.EXTRA_LIST_TYPE)) {
+
+            listType = MovieListType.values()[extras.getInt(Constant.EXTRA_LIST_TYPE)];
+
+            setToolBar();//// TODO: 02/06/2017
+        }
     }
 
     @Override
@@ -61,12 +87,10 @@ public class MovieActivity extends BaseActivity implements MovieContract.View {
 
         setRecyclerView();
 
-        setToolBar();
-
     }
 
     private void setToolBar() {//// TODO: 26/05/2017 şimdilik böyle
-        toolbar.setTitle(R.string.toolbar_title_movies);
+        toolbar.setTitle(listType.getTitle());
     }
 
     private void setRecyclerView() {

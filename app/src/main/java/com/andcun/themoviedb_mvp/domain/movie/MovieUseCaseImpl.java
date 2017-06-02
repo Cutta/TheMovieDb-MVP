@@ -44,7 +44,7 @@ public class MovieUseCaseImpl implements MovieUseCase {
 
     @Override
     public Observable<List<ResultMovie>> getUpcomingMovie(int page) {
-        return apiSource.getTopRatedMovie(page).map(new Function<ResponseResultList<ResultMovie>, List<ResultMovie>>() {
+        return apiSource.getUpcomingMovie(page).map(new Function<ResponseResultList<ResultMovie>, List<ResultMovie>>() {
             @Override
             public List<ResultMovie> apply(@NonNull ResponseResultList<ResultMovie> resultList) throws Exception {
                 return resultList.getResults();
@@ -54,7 +54,7 @@ public class MovieUseCaseImpl implements MovieUseCase {
 
     @Override
     public Observable<List<ResultMovie>> getNowPlayingMovie(int page) {
-        return apiSource.getTopRatedMovie(page).map(new Function<ResponseResultList<ResultMovie>, List<ResultMovie>>() {
+        return apiSource.getNowPlayingMovie(page).map(new Function<ResponseResultList<ResultMovie>, List<ResultMovie>>() {
             @Override
             public List<ResultMovie> apply(@NonNull ResponseResultList<ResultMovie> resultList) throws Exception {
                 return resultList.getResults();

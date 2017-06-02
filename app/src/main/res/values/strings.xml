@@ -4,4 +4,9 @@
 
     <string name="toolbar_title_discover">Keşfet</string>
     <string name="toolbar_title_movies">Filmler</string>
+    <string name="movie_list_title_popular">Popüler</string>
+    <string name="movie_list_title_top_rated">En Çok Oylananlar</string>
+    <string name="movie_list_title_now_playing">Vizyondakiler</string>
+    <string name="movie_list_title_upcoming">Gelecek Filmler</string>
+    <string name="movie_list_title_default">Filmler</string>
 </resources>

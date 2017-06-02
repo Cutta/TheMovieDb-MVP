@@ -5,6 +5,7 @@ import com.andcun.themoviedb_mvp.di.PerActivity;
 import com.andcun.themoviedb_mvp.domain.movie.MovieUseCase;
 import com.andcun.themoviedb_mvp.domain.movie.MovieUseCaseImpl;
 import com.andcun.themoviedb_mvp.ui.movie.MovieContract;
+import com.andcun.themoviedb_mvp.ui.movie.MovieListType;
 
 import dagger.Module;
 import dagger.Provides;
@@ -17,9 +18,11 @@ import dagger.Provides;
 public class MovieModule {
 
     MovieContract.View movieView;
+    MovieListType listType;
 
-    public MovieModule(MovieContract.View movieView) {
+    public MovieModule(MovieContract.View movieView, MovieListType listType) {
         this.movieView = movieView;
+        this.listType = listType;
     }
 
     @PerActivity
@@ -32,5 +35,11 @@ public class MovieModule {
     @Provides
     MovieContract.View provideMovieView() {
         return movieView;
+    }
+
+    @PerActivity
+    @Provides
+    MovieListType provideListType() {
+        return listType;
     }
 }

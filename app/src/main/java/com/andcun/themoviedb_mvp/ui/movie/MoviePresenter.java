@@ -25,22 +25,32 @@ public class MoviePresenter extends BasePresenter<MovieContract.View> implements
     private int FIRST_PAGE = 1;
     private int COUNT_PER_PAGE = 20;
     private boolean isLoading;
+    private MovieListType listType;
 
     @Inject
-    public MoviePresenter(MovieUseCase movieUseCase) {
+    public MoviePresenter(MovieUseCase movieUseCase, MovieListType listType) {
         this.movieUseCase = movieUseCase;
+        this.listType = listType;
     }
 
 
     @Override
     public void onViewReady() {
 
-        //if (condition)
-        getPopularMovie(pageIndex);
-
-    /*    getTopRatedMovie(pageIndex);
-        getNowPlayingMovie(pageIndex);
-        getUpcomingMovie(pageIndex);*/
+        switch (MovieListType.values()[listType.ordinal()]) {
+            case Popular:
+                getPopularMovie(pageIndex);
+                break;
+            case TopRated:
+                getTopRatedMovie(pageIndex);
+                break;
+            case NowPlaying:
+                getNowPlayingMovie(pageIndex);
+                break;
+            case Upcoming:
+                getUpcomingMovie(pageIndex);
+                break;
+        }
     }
 
     @Override
@@ -48,12 +58,20 @@ public class MoviePresenter extends BasePresenter<MovieContract.View> implements
         if (totalItemCount >= pageIndex * COUNT_PER_PAGE && !isLoading) {
             isLoading = true;
             ++pageIndex;
-            //if (condition)
-            getPopularMovie(pageIndex);
-
-    /*    getTopRatedMovie(pageIndex);
-        getNowPlayingMovie(pageIndex);
-        getUpcomingMovie(pageIndex);*/
+            switch (MovieListType.values()[listType.ordinal()]) {
+                case Popular:
+                    getPopularMovie(pageIndex);
+                    break;
+                case TopRated:
+                    getTopRatedMovie(pageIndex);
+                    break;
+                case NowPlaying:
+                    getNowPlayingMovie(pageIndex);
+                    break;
+                case Upcoming:
+                    getUpcomingMovie(pageIndex);
+                    break;
+            }
         }
     }
 
