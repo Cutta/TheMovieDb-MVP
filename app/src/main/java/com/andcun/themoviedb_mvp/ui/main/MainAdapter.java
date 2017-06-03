@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.andcun.themoviedb_mvp.BuildConfig;
 import com.andcun.themoviedb_mvp.R;
 import com.andcun.themoviedb_mvp.data.rest.model.ResultMovie;
+import com.andcun.themoviedb_mvp.data.rest.model.ResultTv;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
@@ -22,15 +23,15 @@ import butterknife.ButterKnife;
  * Created by cuneytcarikci on 23/05/2017.
  */
 
-public class MainMovieAdapter extends RecyclerView.Adapter<MainMovieAdapter.MainMovieViewHolder> {
+public class MainAdapter<T> extends RecyclerView.Adapter<MainAdapter.MainMovieViewHolder> {
 
-    List<ResultMovie> movieList;
+    List<T> movieList;
 
-    public MainMovieAdapter() {
+    public MainAdapter() {
         this.movieList = new ArrayList<>();
     }
 
-    public void setMovieList(List<ResultMovie> movieList) {
+    public void setMovieList(List<T> movieList) {
         this.movieList = movieList;
         notifyDataSetChanged();
     }
@@ -44,13 +45,27 @@ public class MainMovieAdapter extends RecyclerView.Adapter<MainMovieAdapter.Main
 
     @Override
     public void onBindViewHolder(MainMovieViewHolder holder, int position) {
-        ResultMovie tempResultMovie = movieList.get(position);
 
-        holder.tvTitle.setText(tempResultMovie.getTitle());
+        T temp = movieList.get(position);
+        if (temp instanceof ResultMovie) {
+            ResultMovie tempResultMovie = (ResultMovie)movieList.get(position);
 
-        Glide.with(holder.itemView.getContext())
-                .load(BuildConfig.IMAGE_PREFIX + tempResultMovie.getBackdropPath())
-                .into(holder.ivPoster);
+            holder.tvTitle.setText(tempResultMovie.getTitle());
+
+            Glide.with(holder.itemView.getContext())
+                    .load(BuildConfig.IMAGE_PREFIX + tempResultMovie.getBackdropPath())
+                    .into(holder.ivPoster);
+        }else {
+            ResultTv tempTv = (ResultTv) temp;
+
+            holder.tvTitle.setText(tempTv.getName());
+
+            Glide.with(holder.itemView.getContext())
+                    .load(BuildConfig.IMAGE_PREFIX + tempTv.getPosterPath())
+                    .into(holder.ivPoster);
+
+        }
+
 
     }
 

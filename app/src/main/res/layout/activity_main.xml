@@ -18,7 +18,7 @@
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="44dp"
+                android:layout_height="?attr/actionBarSize"
                 android:gravity="center_vertical"
                 android:padding="6dp"
                 android:text="Diziler"
@@ -33,7 +33,7 @@
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="44dp"
+                android:layout_height="?attr/actionBarSize"
                 android:gravity="center_vertical"
                 android:padding="6dp"
                 android:text="Sinemadakiler"
@@ -49,7 +49,7 @@
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="44dp"
+                android:layout_height="?attr/actionBarSize"
                 android:gravity="center_vertical"
                 android:padding="6dp"
                 android:text="Gelecek Filmler"

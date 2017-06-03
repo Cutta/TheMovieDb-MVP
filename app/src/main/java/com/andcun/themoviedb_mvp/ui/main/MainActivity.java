@@ -14,8 +14,8 @@ import com.andcun.themoviedb_mvp.data.rest.model.ResultTv;
 import com.andcun.themoviedb_mvp.di.main.DaggerMainComponent;
 import com.andcun.themoviedb_mvp.di.main.MainModule;
 import com.andcun.themoviedb_mvp.ui.base.BaseActivity;
-import com.andcun.themoviedb_mvp.ui.discover.DiscoverActivity;
-import com.andcun.themoviedb_mvp.ui.tv.TvActivity;
+import com.andcun.themoviedb_mvp.ui.movie.MovieActivity;
+import com.andcun.themoviedb_mvp.ui.movie.MovieListType;
 import com.andcun.themoviedb_mvp.util.Utils;
 
 import java.util.List;
@@ -39,11 +39,11 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     RecyclerView rvMovieUpcoming;
 
 
-    MainTvAdapter adapterTvOnTheAir;
+    MainAdapter<ResultTv> adapterTvOnTheAir;
 
-    MainMovieAdapter adapterMovieNowPlaying;
+    MainAdapter<ResultMovie> adapterMovieNowPlaying;
 
-    MainMovieAdapter adapterMovieUpcoming;
+    MainAdapter<ResultMovie> adapterMovieUpcoming;
 
     @Inject
     MainPresenter mainPresenter;
@@ -54,7 +54,9 @@ public class MainActivity extends BaseActivity implements MainContract.View {
 
         mainPresenter.onViewReady();
 
-        startActivity(new Intent(MainActivity.this, TvActivity.class));
+        Intent intent = MovieActivity.newIntent(MainActivity.this, MovieListType.Upcoming);
+        startActivity(intent);
+
     }
 
     @Override
@@ -74,21 +76,21 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     @Override
     protected void setUpUiComponents() {
 
-        adapterTvOnTheAir = new MainTvAdapter();
+        adapterTvOnTheAir = new MainAdapter<>();
         rvTvOnTheAir.setLayoutManager(new LinearLayoutManager(this));
         rvTvOnTheAir.setMotionEventSplittingEnabled(false);
         rvTvOnTheAir.setHasFixedSize(true);
         rvTvOnTheAir.setNestedScrollingEnabled(false);
         rvTvOnTheAir.setAdapter(adapterTvOnTheAir);
 
-        adapterMovieNowPlaying = new MainMovieAdapter();
+        adapterMovieNowPlaying = new MainAdapter<>();
         rvMovieNowPlaying.setLayoutManager(new LinearLayoutManager(this));
         rvMovieNowPlaying.setMotionEventSplittingEnabled(false);
         rvMovieNowPlaying.setHasFixedSize(true);
         rvMovieNowPlaying.setNestedScrollingEnabled(false);
         rvMovieNowPlaying.setAdapter(adapterMovieNowPlaying);
 
-        adapterMovieUpcoming = new MainMovieAdapter();
+        adapterMovieUpcoming = new MainAdapter<>();
         rvMovieUpcoming.setLayoutManager(new LinearLayoutManager(this));
         rvMovieUpcoming.setMotionEventSplittingEnabled(false);
         rvMovieUpcoming.setHasFixedSize(true);
@@ -109,7 +111,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
 
     @Override
     public void loadOnTheAirTvList(List<ResultTv> tvList) {
-        adapterTvOnTheAir.setTvList(tvList);
+        adapterTvOnTheAir.setMovieList(tvList);
     }
 
     @Override
