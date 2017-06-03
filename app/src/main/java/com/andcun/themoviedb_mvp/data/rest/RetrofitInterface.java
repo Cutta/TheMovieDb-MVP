@@ -37,9 +37,9 @@ interface RetrofitInterface {
                                                           @Query("page") int page);
 
     @GET("tv/top_rated")
-    Observable<ResponseResultList<ResultTv>> getTopRated(@Query("api_key") String apiKey,
-                                                         @Query("language") String language,
-                                                         @Query("page") int page);
+    Observable<ResponseResultList<ResultTv>> getTopRatedTv(@Query("api_key") String apiKey,
+                                                           @Query("language") String language,
+                                                           @Query("page") int page);
 
     @GET("tv/airing_today")
     Observable<ResponseResultList<ResultTv>> getAiringToday(@Query("api_key") String apiKey,

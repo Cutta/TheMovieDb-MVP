@@ -41,28 +41,28 @@ public class ApiSourceImpl implements ApiSource {
     }
 
     @Override
-    public Observable<ResponseResultList<ResultTv>> getPopularTv(String apiKey, String language, int page) {
-        return retrofitInterface.getPopularTv(apiKey, language, page);
+    public Observable<ResponseResultList<ResultTv>> getPopularTv(int page) {
+        return retrofitInterface.getPopularTv(BuildConfig.API_KEY, Locale.getDefault().getLanguage(), page);
     }
 
     @Override
-    public Observable<ResponseResultList<ResultTv>> getTopRated(String apiKey, String language, int page) {
-        return retrofitInterface.getTopRated(apiKey, language, page);
+    public Observable<ResponseResultList<ResultTv>> getTopRatedTv(int page) {
+        return retrofitInterface.getTopRatedTv(BuildConfig.API_KEY, Locale.getDefault().getLanguage(), page);
     }
 
     @Override
-    public Observable<ResponseResultList<ResultTv>> getAiringToday(String apiKey, String language, int page) {
-        return retrofitInterface.getAiringToday(apiKey, language, page);
+    public Observable<ResponseResultList<ResultTv>> getAiringTodayTv(int page) {
+        return retrofitInterface.getAiringToday(BuildConfig.API_KEY, Locale.getDefault().getLanguage(), page);
     }
 
     @Override
-    public Observable<ResponseResultList<ResultMovie>> getPopularMovie(String apiKey, String language, int page) {
-        return retrofitInterface.getPopularMovie(apiKey, language, page);
+    public Observable<ResponseResultList<ResultMovie>> getPopularMovie(int page) {
+        return retrofitInterface.getPopularMovie(BuildConfig.API_KEY, Locale.getDefault().getLanguage(), page);
     }
 
     @Override
-    public Observable<ResponseResultList<ResultMovie>> getTopRatedMovie(String apiKey, String language, int page) {
-        return retrofitInterface.getTopRatedMovie(apiKey, language, page);
+    public Observable<ResponseResultList<ResultMovie>> getTopRatedMovie(int page) {
+        return retrofitInterface.getTopRatedMovie(BuildConfig.API_KEY, Locale.getDefault().getLanguage(), page);
     }
 
     @Override

@@ -20,15 +20,15 @@ public interface ApiSource {
 
     Observable<ResponseResultList<ResultTv>> getTvOnTheAir(int page);
 
-    Observable<ResponseResultList<ResultTv>> getPopularTv(String apiKey, String language, int page);
+    Observable<ResponseResultList<ResultTv>> getPopularTv(int page);
 
-    Observable<ResponseResultList<ResultTv>> getTopRated(String apiKey, String language, int page);
+    Observable<ResponseResultList<ResultTv>> getTopRatedTv(int page);
 
-    Observable<ResponseResultList<ResultTv>> getAiringToday(String apiKey, String language, int page);
+    Observable<ResponseResultList<ResultTv>> getAiringTodayTv(int page);
 
-    Observable<ResponseResultList<ResultMovie>> getPopularMovie(String apiKey, String language, int page);
+    Observable<ResponseResultList<ResultMovie>> getPopularMovie(int page);
 
-    Observable<ResponseResultList<ResultMovie>> getTopRatedMovie(String apiKey, String language, int page);
+    Observable<ResponseResultList<ResultMovie>> getTopRatedMovie(int page);
 
     Observable<ResponseResultList<ResultMovie>> getUpcomingMovie(int page);
 

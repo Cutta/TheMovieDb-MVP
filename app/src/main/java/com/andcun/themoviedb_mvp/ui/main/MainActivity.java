@@ -15,6 +15,7 @@ import com.andcun.themoviedb_mvp.di.main.DaggerMainComponent;
 import com.andcun.themoviedb_mvp.di.main.MainModule;
 import com.andcun.themoviedb_mvp.ui.base.BaseActivity;
 import com.andcun.themoviedb_mvp.ui.discover.DiscoverActivity;
+import com.andcun.themoviedb_mvp.ui.tv.TvActivity;
 import com.andcun.themoviedb_mvp.util.Utils;
 
 import java.util.List;
@@ -53,7 +54,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
 
         mainPresenter.onViewReady();
 
-        startActivity(new Intent(MainActivity.this, DiscoverActivity.class));
+        startActivity(new Intent(MainActivity.this, TvActivity.class));
     }
 
     @Override

@@ -23,13 +23,13 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
         ButterKnife.bind(this);
-        setUpUiComponents();
         onViewReady(savedInstanceState);
     }
 
     @CallSuper
     protected void onViewReady(Bundle savedInstanceState) {
         resolveDaggerDependency();
+        setUpUiComponents();
     }
 
     protected AppComponent getApplicationComponent() {
