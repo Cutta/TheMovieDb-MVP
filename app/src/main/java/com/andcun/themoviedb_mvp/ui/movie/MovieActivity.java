@@ -3,9 +3,11 @@ package com.andcun.themoviedb_mvp.ui.movie;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 
 import com.andcun.themoviedb_mvp.R;
 import com.andcun.themoviedb_mvp.data.rest.model.ResultMovie;
@@ -67,13 +69,23 @@ public class MovieActivity extends BaseActivity implements MovieContract.View {
                 .inject(this);
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
     private void getExtras() {
         Bundle extras = getIntent().getExtras();
         if (extras != null && extras.containsKey(Constant.EXTRA_LIST_TYPE)) {
 
             listType = MovieListType.values()[extras.getInt(Constant.EXTRA_LIST_TYPE)];
 
-            setToolBar();//// TODO: 02/06/2017
         }
     }
 
@@ -87,10 +99,19 @@ public class MovieActivity extends BaseActivity implements MovieContract.View {
 
         setRecyclerView();
 
+        setToolBar();
+
     }
 
-    private void setToolBar() {//// TODO: 26/05/2017 şimdilik böyle
-        toolbar.setTitle(listType.getTitle());
+    private void setToolBar() {
+        setSupportActionBar(toolbar);
+
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setTitle(getResources().getString(listType.getTitle()));
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setDisplayShowHomeEnabled(true);
+        }
     }
 
     private void setRecyclerView() {

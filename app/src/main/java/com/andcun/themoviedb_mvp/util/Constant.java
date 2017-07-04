@@ -7,4 +7,5 @@ package com.andcun.themoviedb_mvp.util;
 public class Constant {
 
     public static final String EXTRA_LIST_TYPE = "listType";
+    public static final String EXTRA_TV_TYPE_ORDINAL = "tv_type_ordinal";
 }

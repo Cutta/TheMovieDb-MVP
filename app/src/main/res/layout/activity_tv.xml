@@ -9,7 +9,7 @@
         android:layout_height="?attr/actionBarSize"
         android:background="@color/colorPrimary"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        android:title="@string/activity_title_discover" />
+        android:title="@string/toolbar_title_discover" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_tv"

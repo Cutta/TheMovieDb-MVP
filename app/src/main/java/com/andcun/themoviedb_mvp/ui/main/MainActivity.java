@@ -54,7 +54,8 @@ public class MainActivity extends BaseActivity implements MainContract.View {
 
         mainPresenter.onViewReady();
 
-        Intent intent = MovieActivity.newIntent(MainActivity.this, MovieListType.Upcoming);
+         Intent intent = MovieActivity.newIntent(MainActivity.this, MovieListType.Upcoming);
+        //Intent intent = TvActivity.newIntent(MainActivity.this, TvType.Popular);
         startActivity(intent);
 
     }

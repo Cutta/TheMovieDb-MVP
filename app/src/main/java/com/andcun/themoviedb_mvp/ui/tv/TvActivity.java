@@ -16,6 +16,7 @@ import com.andcun.themoviedb_mvp.data.rest.model.ResultTv;
 import com.andcun.themoviedb_mvp.di.tv.DaggerTvComponent;
 import com.andcun.themoviedb_mvp.di.tv.TvModule;
 import com.andcun.themoviedb_mvp.ui.base.BaseActivity;
+import com.andcun.themoviedb_mvp.util.Constant;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,13 +25,15 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 
+import static com.andcun.themoviedb_mvp.util.Constant.EXTRA_TV_TYPE_ORDINAL;
+
+
 /**
  * Created by andani on 2.06.2017.
  */
 
 public class TvActivity extends BaseActivity implements TvContract.View {
 
-    public static final String EXTRA_TV_TYPE_ORDINAL = "tv_type_ordinal";
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -46,7 +49,7 @@ public class TvActivity extends BaseActivity implements TvContract.View {
 
     public static Intent newIntent(Context context, @NonNull TvType tvType) {
         Intent intent = new Intent(context, TvActivity.class);
-        intent.putExtra(EXTRA_TV_TYPE_ORDINAL, tvType.ordinal());
+        intent.putExtra(Constant.EXTRA_TV_TYPE_ORDINAL, tvType.ordinal());
         return intent;
     }
 
@@ -127,7 +130,7 @@ public class TvActivity extends BaseActivity implements TvContract.View {
                 int visibleItemCount = layoutManager.getChildCount();
                 int totalItemCount = layoutManager.getItemCount();
                 int firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition();
-                if ((visibleItemCount + firstVisibleItemPosition) >= (totalItemCount - 2)
+                if ((visibleItemCount + firstVisibleItemPosition) >= (totalItemCount - REMAIN_ITEM_COUNT_TO_LOAD_MORE)
                         && firstVisibleItemPosition >= 0)
                     mPresenter.onScrollToEndOfList();
             }

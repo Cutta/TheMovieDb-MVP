@@ -4,9 +4,15 @@
 
     <string name="toolbar_title_discover">Keşfet</string>
     <string name="toolbar_title_movies">Filmler</string>
-    <string name="movie_list_title_popular">Popüler</string>
-    <string name="movie_list_title_top_rated">En Çok Oylananlar</string>
-    <string name="movie_list_title_now_playing">Vizyondakiler</string>
+    <string name="movie_list_title_popular">Popüler Filmler</string>
+    <string name="movie_list_title_top_rated">En Çok Oylanan Filmler</string>
+    <string name="movie_list_title_now_playing">Vizyondaki Filmler</string>
     <string name="movie_list_title_upcoming">Gelecek Filmler</string>
     <string name="movie_list_title_default">Filmler</string>
+
+    <string name="title_tv_popular">Popüler Diziler</string>
+    <string name="title_tv_top_rated">En Çok Oylananlar Diziler</string>
+    <string name="title_tv_on_the_air">Yayındaki Diziler</string>
+    <string name="title_tv_airing_today">Bugün Yayınlanacak Diziler</string>
+    <string name="title_tv_default">Diziler</string>
 </resources>
