@@ -14,8 +14,7 @@ import com.andcun.themoviedb_mvp.data.rest.model.ResultTv;
 import com.andcun.themoviedb_mvp.di.main.DaggerMainComponent;
 import com.andcun.themoviedb_mvp.di.main.MainModule;
 import com.andcun.themoviedb_mvp.ui.base.BaseActivity;
-import com.andcun.themoviedb_mvp.ui.movie.MovieActivity;
-import com.andcun.themoviedb_mvp.ui.movie.MovieListType;
+import com.andcun.themoviedb_mvp.ui.discover.DiscoverActivity;
 import com.andcun.themoviedb_mvp.util.Utils;
 
 import java.util.List;
@@ -54,8 +53,10 @@ public class MainActivity extends BaseActivity implements MainContract.View {
 
         mainPresenter.onViewReady();
 
-         Intent intent = MovieActivity.newIntent(MainActivity.this, MovieListType.Upcoming);
-        //Intent intent = TvActivity.newIntent(MainActivity.this, TvType.Popular);
+        //For other activity just remove desired line
+        // Intent intent = TvActivity.newIntent(MainActivity.this, TvType.Popular);
+        //Intent intent = MovieActivity.newIntent(MainActivity.this, MovieListType.Upcoming);
+        Intent intent = new Intent(MainActivity.this, DiscoverActivity.class);
         startActivity(intent);
 
     }
